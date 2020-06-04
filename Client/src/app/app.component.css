@@ -1,0 +1,29 @@
+.header { 
+    display: grid; 
+    grid-template-columns: 25% 25% 30% 20%; 
+} 
+
+.main { 
+    display: grid; 
+    grid-template-columns: 20% 80%; 
+} 
+
+.product { 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+}
+
+.round { 
+    width: 100px;
+    height: 100px; 
+    border-radius: 50% 
+}
+
+.lesdeux { 
+    position: relative; 
+}
+
+.lesecond { 
+    position: absolute; 
+    bottom: -10px; 
+}
