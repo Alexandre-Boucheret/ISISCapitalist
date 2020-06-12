@@ -1,103 +1,391 @@
 <?xml version="1.0" encoding="utf-8"?>
 <world>
-  <name>str1234</name>
-  <logo>str1234</logo>
-  <money>3.1415926535</money>
-  <score>3.1415926535</score>
-  <totalangels>3.1415926535</totalangels>
-  <activeangels>3.1415926535</activeangels>
-  <angelbonus>123</angelbonus>
-  <lastupdate>12345</lastupdate>
+  <name>Monopoly</name>
+  <logo>Logo.png</logo>
+  <money>4</money>
+  <score>0</score>
+  <totalangels>0</totalangels>
+  <activeangels>0</activeangels>
+  <angelbonus>2</angelbonus> 
+  <lastupdate>0</lastupdate>
   <products>
     <product>
-      <id>123</id>
-      <name>str1234</name>
-      <logo>str1234</logo>
-      <cout>3.1415926535</cout>
-      <croissance>3.1415926535</croissance>
-      <revenu>3.1415926535</revenu>
-      <vitesse>123</vitesse>
-      <quantite>123</quantite>
-      <timeleft>12345</timeleft>
-      <managerUnlocked>true</managerUnlocked>
+      <id>1</id>
+      <name>Rue Lecourbe</name>
+      <logo>RueLecourbe.png</logo>
+      <cout>4</cout>
+      <croissance>1,07</croissance>
+      <revenu>1</revenu>
+      <vitesse>500</vitesse>
+      <quantite>0</quantite>
+      <timeleft>0</timeleft>
+      <managerUnlocked>false</managerUnlocked>
       <palliers>
         <pallier>
-          <name>str1234</name>
-          <logo>str1234</logo>
-          <seuil>3.1415926535</seuil>
-          <idcible>123</idcible>
-          <ratio>3.1415926535</ratio>
+          <name>1.1</name>
+          <logo>palier 1.1</logo>
+          <seuil>100</seuil>
+          <idcible>1</idcible>
+          <ratio>3</ratio>
           <typeratio>vitesse</typeratio>
-          <unlocked>true</unlocked>
+          <unlocked>false</unlocked>
+        </pallier>
+        <pallier>
+          <name>1.2</name>
+          <logo>palier 1.2</logo>
+          <seuil>1000</seuil>
+          <idcible>1</idcible>
+          <ratio>3</ratio>
+          <typeratio>vitesse</typeratio>
+          <unlocked>false</unlocked>
         </pallier>
       </palliers>
     </product>
     <product>
-      <id>123</id>
-      <name>str1234</name>
-      <logo>str1234</logo>
-      <cout>3.1415926535</cout>
-      <croissance>3.1415926535</croissance>
-      <revenu>3.1415926535</revenu>
-      <vitesse>123</vitesse>
-      <quantite>123</quantite>
-      <timeleft>12345</timeleft>
-      <managerUnlocked>true</managerUnlocked>
+      <id>2</id>
+      <name>Rue de Paradis</name>
+      <logo>RueDeParadis.png</logo>
+      <cout>60</cout>
+      <croissance>1,15</croissance>
+      <revenu>60</revenu>
+      <vitesse>3000</vitesse>
+      <quantite>0</quantite>
+      <timeleft>0</timeleft>
+      <managerUnlocked>false</managerUnlocked>
       <palliers>
         <pallier>
-          <name>str1234</name>
-          <logo>str1234</logo>
-          <seuil>3.1415926535</seuil>
-          <idcible>123</idcible>
-          <ratio>3.1415926535</ratio>
+          <name>2.1</name>
+          <logo>palier 2.1</logo>
+          <seuil>5000</seuil>
+          <idcible>2</idcible>
+          <ratio>3</ratio>
           <typeratio>vitesse</typeratio>
-          <unlocked>true</unlocked>
+          <unlocked>false</unlocked>
+        </pallier>
+        <pallier>
+          <name>2.2</name>
+          <logo>palier 2.2</logo>
+          <seuil>10000</seuil>
+          <idcible>2</idcible>
+          <ratio>3</ratio>
+          <typeratio>vitesse</typeratio>
+          <unlocked>false</unlocked>
+        </pallier>
+      </palliers>
+    </product>
+    <product>
+      <id>3</id>
+      <name>Place Pigalle</name>
+      <logo>PLacePigalle.png</logo>
+      <cout>720</cout>
+      <croissance>1,14</croissance>
+      <revenu>540</revenu>
+      <vitesse>6000</vitesse>
+      <quantite>0</quantite>
+      <timeleft>0</timeleft>
+      <managerUnlocked>false</managerUnlocked>
+      <palliers>
+        <pallier>
+          <name>3.1</name>
+          <logo>palier 3.1</logo>
+          <seuil>100000</seuil>
+          <idcible>3</idcible>
+          <ratio>3</ratio>
+          <typeratio>vitesse</typeratio>
+          <unlocked>false</unlocked>
+        </pallier>
+        <pallier>
+          <name>3.2</name>
+          <logo>palier 3.2</logo>
+          <seuil>200000</seuil>
+          <idcible>3</idcible>
+          <ratio>3</ratio>
+          <typeratio>vitesse</typeratio>
+          <unlocked>false</unlocked>
+        </pallier>
+      </palliers>
+    </product>
+    <product>
+      <id>4</id>
+      <name>Faubourg Saint-Honoré</name>
+      <logo>FaubourgSaint-Honore.png</logo>
+      <cout>8640</cout>
+      <croissance>1,13</croissance>
+      <revenu>4320</revenu>
+      <vitesse>12000</vitesse>
+      <quantite>0</quantite>
+      <timeleft>0</timeleft>
+      <managerUnlocked>false</managerUnlocked>
+      <palliers>
+        <pallier>
+          <name>4.1</name>
+          <logo>palier 4.1</logo>
+          <seuil>300000</seuil>
+          <idcible>4</idcible>
+          <ratio>3</ratio>
+          <typeratio>vitesse</typeratio>
+          <unlocked>false</unlocked>
+        </pallier>
+        <pallier>
+          <name>4.2</name>
+          <logo>palier 4.2</logo>
+          <seuil>400000</seuil>
+          <idcible>4</idcible>
+          <ratio>3</ratio>
+          <typeratio>vitesse</typeratio>
+          <unlocked>false</unlocked>
+        </pallier>
+      </palliers>
+    </product>
+    <product>
+      <id>5</id>
+      <name>Avenue Foch</name>
+      <logo>AvenueFoch.png</logo>
+      <cout>103680</cout>
+      <croissance>1,12</croissance>
+      <revenu>51840</revenu>
+      <vitesse>24000</vitesse>
+      <quantite>0</quantite>
+      <timeleft>0</timeleft>
+      <managerUnlocked>false</managerUnlocked>
+      <palliers>
+        <pallier>
+          <name>5.1</name>
+          <logo>palier 5.1</logo>
+          <seuil>500000</seuil>
+          <idcible>5</idcible>
+          <ratio>3</ratio>
+          <typeratio>vitesse</typeratio>
+          <unlocked>false</unlocked>
+        </pallier>
+        <pallier>
+          <name>5.2</name>
+          <logo>palier 5.2</logo>
+          <seuil>600000</seuil>
+          <idcible>5</idcible>
+          <ratio>3</ratio>
+          <typeratio>vitesse</typeratio>
+          <unlocked>false</unlocked>
+        </pallier>
+        <product>
+      <id>6</id>
+      <name>Rue de la Paix</name>
+      <logo>RueDeLaPaix.png</logo>
+      <cout>1244160</cout>
+      <croissance>1,11</croissance>
+      <revenu>622080</revenu>
+      <vitesse>96000</vitesse>
+      <quantite>10/quantite>
+      <timeleft>0</timeleft>
+      <managerUnlocked>false</managerUnlocked>
+      <palliers>
+        <pallier>
+          <name>6.1</name>
+          <logo>palier 6.1</logo>
+          <seuil>800000</seuil>
+          <idcible>6</idcible>
+          <ratio>3</ratio>
+          <typeratio>vitesse</typeratio>
+          <unlocked>false</unlocked>
+        </pallier>
+        <pallier>
+          <name>6.2</name>
+          <logo>palier 6.2</logo>
+          <seuil>900000</seuil>
+          <idcible>6</idcible>
+          <ratio>3</ratio>
+          <typeratio>vitesse</typeratio>
+          <unlocked>false</unlocked>
         </pallier>
       </palliers>
     </product>
   </products>
   <allunlocks>
     <pallier>
-      <name>str1234</name>
-      <logo>str1234</logo>
-      <seuil>3.1415926535</seuil>
-      <idcible>123</idcible>
-      <ratio>3.1415926535</ratio>
+      <name>Niveau 1</name>
+      <logo>etoile.jpg</logo>
+      <seuil>10000</seuil>
+      <idcible>0</idcible>
+      <ratio>10</ratio>
       <typeratio>vitesse</typeratio>
-      <unlocked>true</unlocked>
+      <unlocked>false</unlocked>
+    </pallier>
+    <pallier>
+      <name>Niveau 2</name>
+      <logo>etoile.jpg</logo>
+      <seuil>500000</seuil>
+      <idcible>0</idcible>
+      <ratio>10</ratio>
+      <typeratio>vitesse</typeratio>
+      <unlocked>false</unlocked>
     </pallier>
   </allunlocks>
   <upgrades>
     <pallier>
-      <name>str1234</name>
-      <logo>str1234</logo>
-      <seuil>3.1415926535</seuil>
-      <idcible>123</idcible>
-      <ratio>3.1415926535</ratio>
+      <name>Boost</name>
+      <logo>argents.jpg</logo>
+      <seuil>100000</seuil>
+      <idcible>1</idcible>
+      <ratio>5</ratio>
       <typeratio>vitesse</typeratio>
-      <unlocked>true</unlocked>
+      <unlocked>false</unlocked>
+    </pallier>
+    <pallier>
+      <name>Boost</name>
+      <logo>argents.jpg</logo>
+      <seuil>200000</seuil>
+      <idcible>2</idcible>
+      <ratio>5</ratio>
+      <typeratio>vitesse</typeratio>
+      <unlocked>false</unlocked>
+    </pallier>
+    <pallier>
+      <name>Boost</name>
+      <logo>argents.jpg</logo>
+      <seuil>300000</seuil>
+      <idcible>3</idcible>
+      <ratio>5</ratio>
+      <typeratio>vitesse</typeratio>
+      <unlocked>false</unlocked>
+    </pallier>
+    <pallier>
+      <name>Boost</name>
+      <logo>argents.jpg</logo>
+      <seuil>400000</seuil>
+      <idcible>4</idcible>
+      <ratio>5</ratio>
+      <typeratio>vitesse</typeratio>
+      <unlocked>false</unlocked>
+    </pallier>
+    <pallier>
+      <name>Boost</name>
+      <logo>argents.jpg</logo>
+      <seuil>500000</seuil>
+      <idcible>5</idcible>
+      <ratio>5</ratio>
+      <typeratio>vitesse</typeratio>
+      <unlocked>false</unlocked>
+    </pallier>
+    <pallier>
+      <name>Boost</name>
+      <logo>argents.jpg</logo>
+      <seuil>600000</seuil>
+      <idcible>6</idcible>
+      <ratio>5</ratio>
+      <typeratio>vitesse</typeratio>
+      <unlocked>false</unlocked>
     </pallier>
   </upgrades>
   <angelupgrades>
     <pallier>
-      <name>str1234</name>
-      <logo>str1234</logo>
-      <seuil>3.1415926535</seuil>
-      <idcible>123</idcible>
-      <ratio>3.1415926535</ratio>
+      <name>ange 1</name>
+      <logo>monsieur.jpg</logo>
+      <seuil>50000</seuil>
+      <idcible>1</idcible>
+      <ratio>2</ratio>
       <typeratio>vitesse</typeratio>
-      <unlocked>true</unlocked>
+      <unlocked>false</unlocked>
+    </pallier>
+    <pallier>
+      <name>ange 2</name>
+      <logo>monsieur.jpg</logo>
+      <seuil>100000</seuil>
+      <idcible>2</idcible>
+      <ratio>2</ratio>
+      <typeratio>vitesse</typeratio>
+      <unlocked>false</unlocked>
+    </pallier>
+    <pallier>
+      <name>ange 3</name>
+      <logo>monsieur.jpg</logo>
+      <seuil>500000</seuil>
+      <idcible>3</idcible>
+      <ratio>2</ratio>
+      <typeratio>vitesse</typeratio>
+      <unlocked>false</unlocked>
+    </pallier>
+    <pallier>
+      <name>ange 4</name>
+      <logo>monsieur.jpg</logo>
+      <seuil>1000000</seuil>
+      <idcible>4</idcible>
+      <ratio>2</ratio>
+      <typeratio>vitesse</typeratio>
+      <unlocked>false</unlocked>
+    </pallier>
+    <pallier>
+      <name>ange 5</name>
+      <logo>monsieur.jpg</logo>
+      <seuil>1500000</seuil>
+      <idcible>5</idcible>
+      <ratio>2</ratio>
+      <typeratio>vitesse</typeratio>
+      <unlocked>false</unlocked>
+    </pallier>
+    <pallier>
+      <name>ange 6</name>
+      <logo>monsieur.jpg</logo>
+      <seuil>10000000</seuil>
+      <idcible>6</idcible>
+      <ratio>2</ratio>
+      <typeratio>vitesse</typeratio>
+      <unlocked>false</unlocked>
     </pallier>
   </angelupgrades>
   <managers>
     <pallier>
-      <name>str1234</name>
-      <logo>str1234</logo>
-      <seuil>3.1415926535</seuil>
-      <idcible>123</idcible>
-      <ratio>3.1415926535</ratio>
+      <name>Chapeau</name>
+      <logo>chapeau.jpg</logo>
+      <seuil>1000</seuil>
+      <idcible>1</idcible>
+      <ratio>5</ratio>
       <typeratio>vitesse</typeratio>
-      <unlocked>true</unlocked>
+      <unlocked>false</unlocked>
+    </pallier>
+    <pallier>
+      <name>Chaussure</name>
+      <logo>chaussure.jpg</logo>
+      <seuil>15000</seuil>
+      <idcible>2</idcible>
+      <ratio>5</ratio>
+      <typeratio>vitesse</typeratio>
+      <unlocked>false</unlocked>
+    </pallier>
+    <pallier>
+      <name>Brouette</name>
+      <logo>brouette.jpg</logo>
+      <seuil>100000</seuil>
+      <idcible>3</idcible>
+      <ratio>5</ratio>
+      <typeratio>vitesse</typeratio>
+      <unlocked>false</unlocked>
+    </pallier>
+    <pallier>
+      <name>Chien</name>
+      <logo>chien.jpg</logo>
+      <seuil>500000</seuil>
+      <idcible>4</idcible>
+      <ratio>5</ratio>
+      <typeratio>vitesse</typeratio>
+      <unlocked>false</unlocked>
+    </pallier>
+    <pallier>
+      <name>Voiture</name>
+      <logo>voiture.jpg</logo>
+      <seuil>1200000</seuil>
+      <idcible>5</idcible>
+      <ratio>5</ratio>
+      <typeratio>vitesse</typeratio>
+      <unlocked>false</unlocked>
+    </pallier>
+    <pallier>
+      <name>Bateau</name>
+      <logo>bateau.jpg</logo>
+      <seuil>10000000</seuil>
+      <idcible>6</idcible>
+      <ratio>5</ratio>
+      <typeratio>vitesse</typeratio>
+      <unlocked>false</unlocked>
     </pallier>
   </managers>
 </world>
