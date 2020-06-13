@@ -30,4 +30,8 @@ export class RestserviceService {
   getWorld(): Promise<World> { 
     return this.http.get(this.server + "adventureisis/generic/world").toPromise().catch(this.handleError); 
   };
+
+  putProduct(product: Product): Promise<Boolean> {
+    return this.http.put(this.server + "adventureisis/generic/product", product).toPromise().catch(this.handleError);
+  }
 }

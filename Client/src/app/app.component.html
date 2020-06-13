@@ -1,13 +1,13 @@
 <div class="header">
   <img [attr.src]="server+world.logo" />
   <span id="worldname"> {{world.name}} </span>
-  <div> argent </div> 
-  <div> multiplicateur</div> 
+  <span [innerHTML]="world.money | bigvalue"> </span> 
+  <button mat-button [innerHTML]="qtmulti" (click)="onQtmultiClick()"></button>
   <div> ID du joueur </div> 
 </div> 
 <div class="main"> 
   <div> liste des boutons de menu </div> 
-  <div class="product"> 
-    <app-product [prod]="world.products.product[0]" class="product col-md-6"></app-product>
+  <div class="product" *ngFor="let product of world.products.product">
+    <app-product [prod]="product" [qtmulti]="this.qtmulti" [money]="world.money" (notifyProduction)="onProductionDone($event)" (notifyBuy)="onBuyDone($event)"></app-product>
   </div> 
 </div>
