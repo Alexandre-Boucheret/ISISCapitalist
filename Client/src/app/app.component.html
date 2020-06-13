@@ -5,9 +5,40 @@
   <button mat-button [innerHTML]="qtmulti" (click)="onQtmultiClick()"></button>
   <div> ID du joueur </div> 
 </div> 
-<div class="main"> 
-  <div> liste des boutons de menu </div> 
-  <div class="product" *ngFor="let product of world.products.product">
-    <app-product [prod]="product" [qtmulti]="this.qtmulti" [money]="world.money" (notifyProduction)="onProductionDone($event)" (notifyBuy)="onBuyDone($event)"></app-product>
-  </div> 
+<mat-sidenav-container>
+  <mat-sidenav mode="side" opened>
+    <button mat-raised-button color="primary" [matBadge]="badgeManagers" [matBadgeHidden]="badgeManagers==0" (click)="showManagers = !showManagers">Managers</button>    
+  </mat-sidenav>
+  <mat-sidenav-content class="main">
+    <div class="product" *ngFor="let product of world.products.product">
+      <app-product [prod]="product" [qtmulti]="this.qtmulti" [money]="world.money" (notifyProduction)="onProductionDone($event)" (notifyBuy)="onBuyDone($event)"></app-product>
+    </div> 
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+
+<!-- TODO remplacer avec un MatDialog -->
+<div *ngIf="showManagers" class="modal">
+  <div>
+    <h1 class="title">Managers make you feel better !</h1>
+  </div>
+  <div>
+  <div *ngFor="let manager of world.managers.pallier">
+    <div *ngIf="!manager.unlocked" class="managerslayout">
+      <div>
+        <div class="logo"><img class="round" [attr.src]="server+manager.logo" /> </div>
+      </div>
+      <div>
+        <div class="managername"> {{ manager.name}} </div>
+        <div class="managercible"> {{ world.products.product[manager.idcible-1].name }} </div>
+        <div class="managercost"> {{ manager.seuil}} </div>
+      </div>
+      <div>
+        <button mat-button class="hirebutton" (click)="hireManager(manager)"
+          [ngClass]="{'selectable' : (world.money >= manager.seuil)}">Hire !
+        </button>
+      </div>
+    </div>
+  </div>
+  <button class="closebutton" mat-raisedbutton color="primary" (click)="showManagers = !showManagers">Close</button>
 </div>

@@ -1,7 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import {MatProgressBarModule} from '@angular/material/progress-bar'
+
+import { MatProgressBarModule } from '@angular/material/progress-bar'
+import { MatSnackBarModule } from '@angular/material/snack-bar'
+import { MatSidenavModule } from '@angular/material/sidenav'
+import { MatBadgeModule } from '@angular/material/badge'
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -19,7 +24,10 @@ import { BigvaluePipe } from './bigvalue.pipe';
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatSnackBarModule,
+    MatSidenavModule,
+    MatBadgeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

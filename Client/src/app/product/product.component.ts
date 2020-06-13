@@ -44,7 +44,9 @@ export class ProductComponent implements OnInit {
   }
 
   launchProduction(){
-    this.product.timeleft = this.product.vitesse;
+    if(this.product.quantite > 0){
+      this.product.timeleft = this.product.vitesse;
+    }
   }
 
   calcScore() {
@@ -54,9 +56,16 @@ export class ProductComponent implements OnInit {
         this.product.timeleft = 0;
         this.progressbarvalue = 0;
         this.notifyProduction.emit(this.product);
+        if(this.product.managerUnlocked){
+          this.launchProduction()
+        }
       }else{
         this.product.timeleft -= tempsEcoule;
         this.progressbarvalue = ((this.product.vitesse - this.product.timeleft) / this.product.vitesse) * 100;
+      }
+    }else{
+      if(this.product.managerUnlocked){
+        this.launchProduction();
       }
     }
   }
