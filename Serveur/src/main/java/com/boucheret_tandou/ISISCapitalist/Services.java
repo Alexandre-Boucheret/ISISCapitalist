@@ -75,11 +75,16 @@ public class Services {
         ProductType product = findProductById(world, newproduct.getId()); 
         if (product == null) { return false;} 
 
-        int qtchange = newproduct.getQuantite() - product.getQuantite(); 
+        int qtchange = newproduct.getQuantite(); 
         if (qtchange > 0) {
             double solde = world.getMoney() - qtchange * product.getCout();
             world.setMoney(solde);
             product.setQuantite(newproduct.getQuantite());
+            if(qtchange == 1){
+                product.setCout(product.getCout() * product.getCroissance());
+            }else{
+                product.setCout(product.getCout() * (1-Math.pow(qtchange, product.getCroissance())) / (1-product.getCroissance()));
+            }
 
             List<PallierType> unlocks = checkUnlocks(world, product);
             if(unlocks.size() > 0){
@@ -102,6 +107,7 @@ public class Services {
         ProductType product = findProductById(world, manager.getIdcible()); 
         if (product == null) { return false; } 
 
+        product.setManagerUnlocked(true);
         manager.setUnlocked(true);
         double solde = world.getMoney() - manager.getSeuil();
         world.setMoney(solde);
@@ -133,7 +139,7 @@ public class Services {
 
 	public Boolean updateUpgrade(String username, PallierType newupgrade) {
         World world = getWorld(username);
-        PallierType upgrade = findManagerByName(world, newupgrade.getName()); 
+        PallierType upgrade = findUpgradeByName(world, newupgrade.getName()); 
         if (upgrade == null) { return false; } 
 
         ProductType product = findProductById(world, upgrade.getIdcible()); 
@@ -142,13 +148,15 @@ public class Services {
         upgrade.setUnlocked(true);
         double solde = world.getMoney() - upgrade.getSeuil();
         world.setMoney(solde);
+
+        applyUpgrade(world, newupgrade);
         saveWorldToXml(username, world); 
         return true;
 	}
 
 	public Boolean updateAngelUpgrade(String username, PallierType newangelupgrade) {
         World world = getWorld(username);
-        PallierType angelupgrade = findManagerByName(world, newangelupgrade.getName()); 
+        PallierType angelupgrade = findAngelUpgradeByName(world, newangelupgrade.getName()); 
         if (angelupgrade == null) { return false; } 
 
         ProductType product = findProductById(world, angelupgrade.getIdcible()); 
@@ -157,6 +165,8 @@ public class Services {
         angelupgrade.setUnlocked(true);
         double solde = world.getMoney() - angelupgrade.getSeuil();
         world.setMoney(solde);
+
+        applyUpgrade(world, newangelupgrade);
         saveWorldToXml(username, world); 
         return true;
 	}
@@ -166,12 +176,14 @@ public class Services {
         World world = getWorld(username);
         World newWorld = readWorldFromXml(null);
 
+        int angesSupplementaires = (int)(150 * Math.sqrt(world.getScore()/Math.pow(15, 10)) - world.getTotalangels()); 
+
         newWorld.setScore(world.getScore());
-        newWorld.setActiveangels(world.getActiveangels());
-        newWorld.setTotalangels(world.getTotalangels());
+        newWorld.setActiveangels(world.getActiveangels() + angesSupplementaires);
+        newWorld.setTotalangels(world.getTotalangels() + angesSupplementaires);
 
         for(ProductType product : newWorld.getProducts().getProduct()){
-            double revenue = product.getQuantite() * product.getRevenu() * (1 + newWorld.getActiveangels() * newWorld.getAngelbonus() / 100);
+            double revenue = product.getRevenu() * (1 + newWorld.getActiveangels() * newWorld.getAngelbonus() / 100);
             product.setRevenu(revenue);
         }
         
@@ -185,7 +197,8 @@ public class Services {
                 for(ProductType product : world.getProducts().getProduct()){
                     switch (unlock.getTyperatio()) {
                         case VITESSE:
-                            product.setVitesse((int)(product.getVitesse()/unlock.getRatio()));
+                            int newVitesse =(int)(product.getVitesse()/unlock.getRatio());
+                            product.setVitesse((newVitesse > 0) ? newVitesse : 1);
                             break;
                         case GAIN:
                             product.setRevenu(product.getRevenu()*unlock.getRatio());
@@ -201,7 +214,8 @@ public class Services {
                 ProductType product = findProductById(world, unlock.getIdcible());
                 switch (unlock.getTyperatio()) {
                     case VITESSE:
-                        product.setVitesse((int)(product.getVitesse()/unlock.getRatio()));
+                        int newVitesse =(int)(product.getVitesse()/unlock.getRatio());
+                        product.setVitesse((newVitesse > 0) ? newVitesse : 1);
                         break;
                     case GAIN:
                         product.setRevenu(product.getRevenu()*unlock.getRatio());
@@ -219,6 +233,22 @@ public class Services {
 
     private PallierType findManagerByName(World world, String name) {
         return world.getManagers().getPallier()
+                                    .stream()
+                                    .filter(p -> p.getName().equals(name))
+                                    .findFirst()
+                                    .get();
+    }    
+    
+    private PallierType findAngelUpgradeByName(World world, String name) {
+        return world.getAngelupgrades().getPallier()
+                                    .stream()
+                                    .filter(p -> p.getName().equals(name))
+                                    .findFirst()
+                                    .get();
+    }    
+    
+    private PallierType findUpgradeByName(World world, String name) {
+        return world.getUpgrades().getPallier()
                                     .stream()
                                     .filter(p -> p.getName().equals(name))
                                     .findFirst()
