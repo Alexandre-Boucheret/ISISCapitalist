@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { MatProgressBarModule } from '@angular/material/progress-bar'
@@ -24,6 +25,7 @@ import { BigvaluePipe } from './bigvalue.pipe';
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    FormsModule,
     MatProgressBarModule,
     MatSnackBarModule,
     MatSidenavModule,

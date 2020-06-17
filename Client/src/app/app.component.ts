@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ViewChildren, QueryList } from '@angular/core';
 import { RestserviceService } from './restservice.service'; 
 import { World, Product, Pallier } from './world';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ProductComponent } from './product/product.component';
 
 @Component({
   selector: 'app-root',
@@ -12,16 +13,27 @@ export class AppComponent {
   title = 'ISISCapitalist';
   world: World = new World();
   server: string;
+  username: string;
   qtmulti: string;
   qtmulti_pos: number = 0;
   qtmulti_value: string[] = ["x1", "x10", "x100", "Max"];
-  showManagers: boolean = true;
+  showManagers: boolean = false;
   badgeManagers: number = 0;
+  showUnlocks: boolean = false;
+
+  @ViewChildren(ProductComponent) productsComponent: QueryList<ProductComponent>;
 
   constructor(private service: RestserviceService, private snackbar: MatSnackBar) { 
     this.server = service.getServer(); 
+    this.username = localStorage.getItem("username");
+    if(!this.username){
+      this.username = "Player" + Math.floor(Math.random() * 10000)
+    }
+    localStorage.setItem("username", this.username);
+    this.service.setUser(this.username)
     service.getWorld().then( world => { 
       this.world = world; 
+      this.calcBadgeManager();
     }); 
   }
 
@@ -36,7 +48,6 @@ export class AppComponent {
   }
 
   onBuyDone(cout: number){
-    // this.world.score += product.cout * product.quantite;
     this.world.money -= cout;
     this.calcBadgeManager();
   }
@@ -49,12 +60,19 @@ export class AppComponent {
     this.qtmulti = this.qtmulti_value[this.qtmulti_pos];
   }
 
+  onUsernameChanged(){
+    localStorage.setItem("username", this.username);
+    this.service.setUser(this.username);
+    document.location.reload(true);
+  }
+
   hireManager(manager : Pallier){
     if(manager.seuil <= this.world.money){
       this.world.money -= manager.seuil;
       manager.unlocked = true;
       this.world.products.product[manager.idcible-1].managerUnlocked = true;
       this.popMessage(manager.name + " a été engagé !")
+      this.service.putManager(manager);
     }
   }
 
@@ -65,4 +83,5 @@ export class AppComponent {
   popMessage(message : string) : void {
     this.snackbar.open(message, "", { duration : 2000 })
   }
+
 }

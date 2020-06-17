@@ -1,7 +1,7 @@
 
-<img src="Logo.png" (click)="launchProduction()"/>
+<img src="{{server}}icones/{{product.logo}}" (click)="launchProduction()"/>
 <span>{{product.quantite}}</span>
-<mat-progress-bar class="progressbar" [value]="progressbarvalue"></mat-progress-bar>
+<mat-progress-bar [(ngModel)]="progressbar" class="progressbar" [value]="progressbarvalue"></mat-progress-bar>
 <!-- TODO afficher le cout -->
 <button mat-button (click)="onBuy()" [disabled]="canBuy() === false">
     <div>Acheter</div>

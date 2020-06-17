@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Product } from '../world';
+import { Product, Pallier, World } from '../world';
 import { RestserviceService } from '../restservice.service';
+import { MatProgressBar, MatProgressBarModule } from '@angular/material/progress-bar';
 
 @Component({
   selector: 'app-product',
@@ -8,18 +9,29 @@ import { RestserviceService } from '../restservice.service';
   styleUrls: ['./product.component.css']
 })
 export class ProductComponent implements OnInit {
-  service: RestserviceService;
   product: Product; 
+  world: World;
+  progressbar: MatProgressBar;
   progressbarvalue: number;
   lastupdate: number = Date.now();
+  server = "http://localhost:8080/";
   _qtmulti: string;
   _money: number;
   
   @Input() 
   set prod(value: Product) { 
     this.product = value; 
+    if (this.product && this.product.timeleft > 0) { 
+      this.lastupdate = Date.now(); 
+      let progress = (this.product.vitesse - this.product.timeleft) / this.product.vitesse; 
+      this.progressbar.value = progress; 
+    }
   } 
 
+  @Input()
+  set monde(value: World){
+    this.world = value;
+  }
   @Input() 
   set qtmulti(value: string) { 
     this._qtmulti = value; 
@@ -37,15 +49,18 @@ export class ProductComponent implements OnInit {
   @Output() 
   notifyBuy: EventEmitter<Number> = new EventEmitter<Number>();
   
-  constructor() {}
+  constructor(private service: RestserviceService) {}
 
   ngOnInit(): void {
     setInterval(() => { this.calcScore(); }, 100);
   }
 
   launchProduction(){
-    if(this.product.quantite > 0){
+    if(this.product.quantite > 0 && this.product.timeleft === 0){
       this.product.timeleft = this.product.vitesse;
+      if(!this.product.managerUnlocked){
+        this.service.putProduct(this.product);
+      }
     }
   }
 
@@ -68,6 +83,7 @@ export class ProductComponent implements OnInit {
         this.launchProduction();
       }
     }
+    this.lastupdate = Date.now();
   }
 
   calcMaxCanBuy(): number {
@@ -77,6 +93,55 @@ export class ProductComponent implements OnInit {
 
   calcCout(qte: number): number{
     return this.product.cout*(1-Math.pow(this.product.croissance, qte))/(1-this.product.croissance);
+  }
+
+  calcUpgrade(unlock: Pallier){
+    if(!unlock.unlocked){
+      if(unlock.idcible == 0){
+        this.world.products.product.forEach(p => {
+          switch (unlock.typeratio.toUpperCase()) {
+                  case "VITESSE":
+                      var newVitesse = p.vitesse/unlock.ratio;
+                      var tempsRestant = p.vitesse - p.timeleft;
+                      p.vitesse = (newVitesse > 0) ? newVitesse : 1;
+                      if(p.timeleft >= 0){
+                        p.timeleft += tempsRestant/unlock.ratio;
+                        this.progressbar.value = (this.product.vitesse - this.product.timeleft) / this.product.vitesse;
+                      }
+                      break;
+                  case "GAIN":
+                      p.revenu = p.revenu * unlock.ratio;
+                      break;
+                  case "ANGE":
+                      this.world.angelbonus += unlock.ratio;
+                      break;                
+                  default:
+                      break;
+              }
+        });
+      }else{
+          switch (unlock.typeratio.toUpperCase()) {
+            case "VITESSE":
+              var newVitesse = this.product.vitesse/unlock.ratio;
+              var tempsRestant = this.product.vitesse - this.product.timeleft;
+              this.product.vitesse = (newVitesse > 0) ? newVitesse : 1;
+              if(this.product.timeleft >= 0){
+                this.product.timeleft += tempsRestant/unlock.ratio;
+                this.progressbar.value = (this.product.vitesse - this.product.timeleft) / this.product.vitesse;
+              }
+              break;
+            case "GAIN":
+                this.product.revenu = this.product.revenu * unlock.ratio;
+                break;
+            case "ANGE":
+                this.world.angelbonus += unlock.ratio;
+                break;                
+            default:
+                break;
+        }
+      }
+      unlock.unlocked = true;
+  }
   }
 
   canBuy(): boolean {
@@ -114,7 +179,21 @@ export class ProductComponent implements OnInit {
           this.product.cout = this.product.cout * Math.pow(this.product.croissance, this.calcMaxCanBuy());
         break;
     }
-    // this.service.putProduct(this.product);
+    this.product.palliers.pallier.filter(p => p.seuil <= this.product.quantite && p.unlocked == false).forEach(unlock => {
+      unlock.unlocked = true;
+      this.calcUpgrade(unlock);
+    });
+    this.service.putProduct(this.product);
+    console.log(this.product.cout);
+
+    var minQteProduit = this.product.quantite;
+    this.world.products.product.forEach(p => {
+      minQteProduit = Math.min(minQteProduit, p.quantite);
+    });
+    
+    this.world.allunlocks.pallier.filter(p => p.unlocked == false && p.seuil <= minQteProduit).forEach(p =>{
+      this.calcUpgrade(p);
+    });
   }
 
 }

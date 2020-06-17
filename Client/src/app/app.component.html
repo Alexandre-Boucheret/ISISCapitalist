@@ -1,44 +1,67 @@
 <div class="header">
-  <img [attr.src]="server+world.logo" />
+  <img src="{{server}}icones/{{world.logo}}" />
   <span id="worldname"> {{world.name}} </span>
-  <span [innerHTML]="world.money | bigvalue"> </span> 
+  <span [innerHTML]="world.money | bigvalue"> </span>
   <button mat-button [innerHTML]="qtmulti" (click)="onQtmultiClick()"></button>
-  <div> ID du joueur </div> 
-</div> 
+  <input type="text" [(ngModel)]="username" (change)="onUsernameChanged()" />
+</div>
 <mat-sidenav-container>
   <mat-sidenav mode="side" opened>
-    <button mat-raised-button color="primary" [matBadge]="badgeManagers" [matBadgeHidden]="badgeManagers==0" (click)="showManagers = !showManagers">Managers</button>    
+    <button mat-raised-button color="primary" [matBadge]="badgeManagers" [matBadgeHidden]="badgeManagers==0"
+      (click)="showManagers = !showManagers">Managers</button>
+    <button mat-raised-button color="primary" (click)="showUnlocks = !showUnlocks">Unlocks</button>
   </mat-sidenav>
   <mat-sidenav-content class="main">
     <div class="product" *ngFor="let product of world.products.product">
-      <app-product [prod]="product" [qtmulti]="this.qtmulti" [money]="world.money" (notifyProduction)="onProductionDone($event)" (notifyBuy)="onBuyDone($event)"></app-product>
-    </div> 
+      <app-product [prod]="product" [monde]="this.world" [qtmulti]="this.qtmulti" [money]="world.money"
+        (notifyProduction)="onProductionDone($event)" (notifyBuy)="onBuyDone($event)"></app-product>
+    </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
 
-
-<!-- TODO remplacer avec un MatDialog -->
 <div *ngIf="showManagers" class="modal">
   <div>
     <h1 class="title">Managers make you feel better !</h1>
   </div>
   <div>
-  <div *ngFor="let manager of world.managers.pallier">
-    <div *ngIf="!manager.unlocked" class="managerslayout">
-      <div>
-        <div class="logo"><img class="round" [attr.src]="server+manager.logo" /> </div>
+    <div *ngFor="let manager of world.managers.pallier">
+      <div *ngIf="!manager.unlocked" class="managerslayout">
+        <div>
+          <div class="logo"><img class="round" src="{{server}}icones/{{manager.logo}}" /> </div>
+        </div>
+        <div>
+          <div class="managername"> {{ manager.name}} </div>
+          <div class="managercible"> {{ world.products.product[manager.idcible-1].name }} </div>
+          <div class="managercost"> {{ manager.seuil}} </div>
+        </div>
+        <div>
+          <button mat-button class="hirebutton" (click)="hireManager(manager)"
+            [ngClass]="{'selectable' : (world.money >= manager.seuil)}">Hire !
+          </button>
+        </div>
       </div>
-      <div>
-        <div class="managername"> {{ manager.name}} </div>
-        <div class="managercible"> {{ world.products.product[manager.idcible-1].name }} </div>
-        <div class="managercost"> {{ manager.seuil}} </div>
-      </div>
-      <div>
-        <button mat-button class="hirebutton" (click)="hireManager(manager)"
-          [ngClass]="{'selectable' : (world.money >= manager.seuil)}">Hire !
-        </button>
+    </div>
+    <button class="closebutton" mat-raisedbutton color="primary" (click)="showManagers = !showManagers">Close</button>
+  </div>
+</div>
+
+<div *ngIf="showUnlocks" class="modal">
+  <div>
+    <h1 class="title">Unlocks make you feel better !</h1>
+  </div>
+  <div *ngFor="let product of world.products.product">
+    <div *ngFor="let unlock of product.palliers.pallier">
+      <div *ngIf="!unlock.unlocked">
+        <div>
+          <div class="logo"><img class="round" src="{{server}}icones/{{unlock.logo}}" /> </div>
+        </div>
+        <div>
+          <div> {{ unlock.name}} </div>
+          <div> {{ unlock.typeratio }} </div>
+          <div> {{ unlock.seuil}} </div>
+        </div>
       </div>
     </div>
   </div>
-  <button class="closebutton" mat-raisedbutton color="primary" (click)="showManagers = !showManagers">Close</button>
+  <button class="closebutton" mat-raisedbutton color="primary" (click)="showUnlocks = !showUnlocks">Close</button>
 </div>

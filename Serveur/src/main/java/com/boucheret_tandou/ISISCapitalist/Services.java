@@ -75,16 +75,13 @@ public class Services {
         ProductType product = findProductById(world, newproduct.getId()); 
         if (product == null) { return false;} 
 
-        int qtchange = newproduct.getQuantite(); 
+        int qtchange = newproduct.getQuantite() - product.getQuantite(); 
         if (qtchange > 0) {
-            double solde = world.getMoney() - qtchange * product.getCout();
+            double solde = world.getMoney() - product.getCout() * (1-Math.pow(product.getCroissance(), qtchange))/(1-product.getCroissance());
             world.setMoney(solde);
             product.setQuantite(newproduct.getQuantite());
-            if(qtchange == 1){
-                product.setCout(product.getCout() * product.getCroissance());
-            }else{
-                product.setCout(product.getCout() * (1-Math.pow(qtchange, product.getCroissance())) / (1-product.getCroissance()));
-            }
+                
+            product.setCout(product.getCout() * Math.pow(product.getCroissance(), qtchange));
 
             List<PallierType> unlocks = checkUnlocks(world, product);
             if(unlocks.size() > 0){

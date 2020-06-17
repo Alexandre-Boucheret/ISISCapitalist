@@ -23,7 +23,7 @@
       <palliers>
         <pallier>
           <name>1.1</name>
-          <logo>palier 1.1</logo>
+          <logo>RueLecourbe.png</logo>
           <seuil>100</seuil>
           <idcible>1</idcible>
           <ratio>3</ratio>
@@ -32,7 +32,7 @@
         </pallier>
         <pallier>
           <name>1.2</name>
-          <logo>palier 1.2</logo>
+          <logo>RueLecourbe.png</logo>
           <seuil>1000</seuil>
           <idcible>1</idcible>
           <ratio>3</ratio>
@@ -55,7 +55,7 @@
       <palliers>
         <pallier>
           <name>2.1</name>
-          <logo>palier 2.1</logo>
+          <logo>RueDeParadis.png</logo>
           <seuil>5000</seuil>
           <idcible>2</idcible>
           <ratio>3</ratio>
@@ -64,7 +64,7 @@
         </pallier>
         <pallier>
           <name>2.2</name>
-          <logo>palier 2.2</logo>
+          <logo>RueDeParadis.png</logo>
           <seuil>10000</seuil>
           <idcible>2</idcible>
           <ratio>3</ratio>
@@ -76,7 +76,7 @@
     <product>
       <id>3</id>
       <name>Place Pigalle</name>
-      <logo>PLacePigalle.png</logo>
+      <logo>PlacePigalle.png</logo>
       <cout>720</cout>
       <croissance>1.14</croissance>
       <revenu>540</revenu>
@@ -87,7 +87,7 @@
       <palliers>
         <pallier>
           <name>3.1</name>
-          <logo>palier 3.1</logo>
+          <logo>PlacePigalle.png</logo>
           <seuil>100000</seuil>
           <idcible>3</idcible>
           <ratio>3</ratio>
@@ -96,7 +96,7 @@
         </pallier>
         <pallier>
           <name>3.2</name>
-          <logo>palier 3.2</logo>
+          <logo>PlacePigalle.png</logo>
           <seuil>200000</seuil>
           <idcible>3</idcible>
           <ratio>3</ratio>
@@ -119,7 +119,7 @@
       <palliers>
         <pallier>
           <name>4.1</name>
-          <logo>palier 4.1</logo>
+          <logo>FaubourgSaint-Honore.png</logo>
           <seuil>300000</seuil>
           <idcible>4</idcible>
           <ratio>3</ratio>
@@ -128,7 +128,7 @@
         </pallier>
         <pallier>
           <name>4.2</name>
-          <logo>palier 4.2</logo>
+          <logo>FaubourgSaint-Honore.png</logo>
           <seuil>400000</seuil>
           <idcible>4</idcible>
           <ratio>3</ratio>
@@ -151,7 +151,7 @@
       <palliers>
         <pallier>
           <name>5.1</name>
-          <logo>palier 5.1</logo>
+          <logo>AvenueFoch.png</logo>
           <seuil>500000</seuil>
           <idcible>5</idcible>
           <ratio>3</ratio>
@@ -160,7 +160,7 @@
         </pallier>
         <pallier>
           <name>5.2</name>
-          <logo>palier 5.2</logo>
+          <logo>AvenueFoch.png</logo>
           <seuil>600000</seuil>
           <idcible>5</idcible>
           <ratio>3</ratio>
@@ -183,7 +183,7 @@
         <palliers>
           <pallier>
             <name>6.1</name>
-            <logo>palier 6.1</logo>
+            <logo>RueDeLaPaix.png</logo>
             <seuil>800000</seuil>
             <idcible>6</idcible>
             <ratio>3</ratio>
@@ -192,7 +192,7 @@
           </pallier>
           <pallier>
             <name>6.2</name>
-            <logo>palier 6.2</logo>
+            <logo>RueDeLaPaix.png</logo>
             <seuil>900000</seuil>
             <idcible>6</idcible>
             <ratio>3</ratio>
