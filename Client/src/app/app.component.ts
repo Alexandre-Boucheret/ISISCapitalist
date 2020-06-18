@@ -20,6 +20,8 @@ export class AppComponent {
   showManagers: boolean = false;
   badgeManagers: number = 0;
   showUnlocks: boolean = false;
+  showUpgrades: boolean = false;
+  badgeUpgrades: number = 0;
 
   @ViewChildren(ProductComponent) productsComponent: QueryList<ProductComponent>;
 
@@ -34,6 +36,7 @@ export class AppComponent {
     service.getWorld().then( world => { 
       this.world = world; 
       this.calcBadgeManager();
+      this.calcBadgeUpgrade();
     }); 
   }
 
@@ -45,11 +48,13 @@ export class AppComponent {
     this.world.score += product.revenu * product.quantite;
     this.world.money += product.revenu * product.quantite;
     this.calcBadgeManager();
+    this.calcBadgeUpgrade();
   }
 
   onBuyDone(cout: number){
     this.world.money -= cout;
     this.calcBadgeManager();
+    this.calcBadgeUpgrade();
   }
 
   onQtmultiClick(){
@@ -74,10 +79,27 @@ export class AppComponent {
       this.popMessage(manager.name + " a été engagé !")
       this.service.putManager(manager);
     }
+  }  
+  
+  buyUpgrade(upgrade : Pallier){
+    if(upgrade.seuil <= this.world.money){
+      this.service.putUpgrade(upgrade);
+      this.world.money -= upgrade.seuil;
+      if(upgrade.idcible == 0){
+        this.productsComponent.first.calcUpgrade(upgrade);
+      }else{
+        this.productsComponent.find(c => c.product.id == upgrade.idcible).calcUpgrade(upgrade);
+      }
+      upgrade.unlocked = true;
+    }
   }
 
   calcBadgeManager(): void{
     this.badgeManagers = this.world.managers.pallier.filter(p => p.seuil <= this.world.money && p.unlocked == false).length;
+  }
+
+  calcBadgeUpgrade(): void{
+    this.badgeUpgrades = this.world.upgrades.pallier.filter(p => p.seuil <= this.world.money && p.unlocked == false).length;
   }
 
   popMessage(message : string) : void {

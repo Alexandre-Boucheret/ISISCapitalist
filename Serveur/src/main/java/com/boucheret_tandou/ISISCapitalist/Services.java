@@ -160,7 +160,7 @@ public class Services {
         if (product == null) { return false; } 
 
         angelupgrade.setUnlocked(true);
-        double solde = world.getMoney() - angelupgrade.getSeuil();
+        double solde = world.getActiveangels() - angelupgrade.getSeuil();
         world.setMoney(solde);
 
         applyUpgrade(world, newangelupgrade);

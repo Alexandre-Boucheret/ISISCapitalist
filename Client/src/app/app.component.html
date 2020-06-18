@@ -10,6 +10,8 @@
     <button mat-raised-button color="primary" [matBadge]="badgeManagers" [matBadgeHidden]="badgeManagers==0"
       (click)="showManagers = !showManagers">Managers</button>
     <button mat-raised-button color="primary" (click)="showUnlocks = !showUnlocks">Unlocks</button>
+    <button mat-raised-button color="primary" [matBadge]="badgeUpgrades" [matBadgeHidden]="badgeUpgrades==0"
+      (click)="showUpgrades = !showUpgrades">Upgrades</button>
   </mat-sidenav>
   <mat-sidenav-content class="main">
     <div class="product" *ngFor="let product of world.products.product">
@@ -64,4 +66,29 @@
     </div>
   </div>
   <button class="closebutton" mat-raisedbutton color="primary" (click)="showUnlocks = !showUnlocks">Close</button>
+</div>
+
+<div *ngIf="showUpgrades" class="modal">
+  <div>
+    <h1 class="title">Upgrades make you feel better !</h1>
+  </div>
+  <div *ngFor="let upgrade of world.upgrades.pallier">
+    <div *ngIf="!upgrade.unlocked">
+      <div>
+        <div class="logo"><img class="round" src="{{server}}icones/{{upgrade.logo}}" /> </div>
+      </div>
+      <div>
+        <div> {{ upgrade.name}} </div>
+        <div> {{ upgrade.ratio}} </div>
+        <div> {{ upgrade.typeratio}} </div>
+        <div> {{ upgrade.seuil}} </div>
+      </div>
+      <div>
+        <button mat-button class="hirebutton" (click)="buyUpgrade(upgrade)"
+          [ngClass]="{'selectable' : (world.money >= upgrade.seuil)}">Buy !
+        </button>
+      </div>
+    </div>
+  </div>
+  <button class="closebutton" mat-raisedbutton color="primary" (click)="showUpgrades = !showUpgrades">Close</button>
 </div>

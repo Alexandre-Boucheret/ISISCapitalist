@@ -224,7 +224,7 @@
   </allunlocks>
   <upgrades>
     <pallier>
-      <name>Boost</name>
+      <name>Boost Rue Lecourbe</name>
       <logo>argents.jpg</logo>
       <seuil>100000</seuil>
       <idcible>1</idcible>
@@ -233,7 +233,7 @@
       <unlocked>false</unlocked>
     </pallier>
     <pallier>
-      <name>Boost</name>
+      <name>Boost Rue de Paradis</name>
       <logo>argents.jpg</logo>
       <seuil>200000</seuil>
       <idcible>2</idcible>
@@ -242,7 +242,7 @@
       <unlocked>false</unlocked>
     </pallier>
     <pallier>
-      <name>Boost</name>
+      <name>Boost Place Pigalle</name>
       <logo>argents.jpg</logo>
       <seuil>300000</seuil>
       <idcible>3</idcible>
@@ -251,7 +251,7 @@
       <unlocked>false</unlocked>
     </pallier>
     <pallier>
-      <name>Boost</name>
+      <name>Boost Faubourg Saint-Honoré</name>
       <logo>argents.jpg</logo>
       <seuil>400000</seuil>
       <idcible>4</idcible>
@@ -260,7 +260,7 @@
       <unlocked>false</unlocked>
     </pallier>
     <pallier>
-      <name>Boost</name>
+      <name>Boost Avenue Foch</name>
       <logo>argents.jpg</logo>
       <seuil>500000</seuil>
       <idcible>5</idcible>
@@ -269,7 +269,7 @@
       <unlocked>false</unlocked>
     </pallier>
     <pallier>
-      <name>Boost</name>
+      <name>Boost Rue de la Paix</name>
       <logo>argents.jpg</logo>
       <seuil>600000</seuil>
       <idcible>6</idcible>
