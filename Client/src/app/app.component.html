@@ -12,6 +12,8 @@
     <button mat-raised-button color="primary" (click)="showUnlocks = !showUnlocks">Unlocks</button>
     <button mat-raised-button color="primary" [matBadge]="badgeUpgrades" [matBadgeHidden]="badgeUpgrades==0"
       (click)="showUpgrades = !showUpgrades">Upgrades</button>
+    <button mat-raised-button color="primary" (click)="showInvestors = !showInvestors">Investors</button>
+    <button mat-raised-button color="primary" (click)="showAngelsUpgrades = !showAngelsUpgrades">Angel Upgrades</button>
   </mat-sidenav>
   <mat-sidenav-content class="main">
     <div class="product" *ngFor="let product of world.products.product">
@@ -91,4 +93,47 @@
     </div>
   </div>
   <button class="closebutton" mat-raisedbutton color="primary" (click)="showUpgrades = !showUpgrades">Close</button>
+</div>
+
+<div *ngIf="showInvestors" class="modal">
+  <div>
+    <h1 class="title">Investors</h1>
+  </div>
+  <div>
+    <div>
+      <div>{{world.activeangels}} investisseurs possédés</div>
+      <div>{{world.angelbonus}}%</div>
+    </div>
+    <div>
+      <button class="investorsbutton" mat-raisedbutton color="primary" (click)="buyInvestors()">
+        <div>{{claimableInvestors}} disponible(s)</div>
+      </button>
+    </div>
+  </div>
+  <button class="closebutton" mat-raisedbutton color="primary" (click)="showInvestors = !showInvestors">Close</button>
+</div>
+
+<div *ngIf="showAngelsUpgrades" class="modal">
+  <div>
+    <h1 class="title">Angels Upgrades make you feel better !</h1>
+  </div>
+  <div *ngFor="let angelUpgrade of world.angelupgrades.pallier">
+    <div *ngIf="!angelUpgrade.unlocked">
+      <div>
+        <div class="logo"><img class="round" src="{{server}}icones/{{angelUpgrade.logo}}" /> </div>
+      </div>
+      <div>
+        <div> {{ angelUpgrade.name}} </div>
+        <div> {{ angelUpgrade.typeratio }} </div>
+        <div> {{ angelUpgrade.seuil}} </div>
+      </div>
+      <div>
+        <button mat-button class="hirebutton" (click)="buyAngelUpgrade(angelUpgrade)"
+          [ngClass]="{'selectable' : (world.money >= angelUpgrade.seuil)}">Buy !
+        </button>
+      </div>
+    </div>
+  </div>
+  <button class="closebutton" mat-raisedbutton color="primary"
+    (click)="showAngelsUpgrades = !showAngelsUpgrades">Close</button>
 </div>

@@ -51,4 +51,14 @@ export class RestserviceService {
     .toPromise().catch(this.handleError);
   }
 
+  deleteWorld() {
+    return this.http.delete(this.server + "adventureisis/generic/world", { headers: this.setHeaders(this.user)} )
+    .toPromise().catch(this.handleError);
+  }
+
+  putAngelUpgrade(upgrade: Pallier) {
+    return this.http.put(this.server + "adventureisis/generic/angelupgrade", upgrade, { headers: this.setHeaders(this.user)} )
+    .toPromise().catch(this.handleError);
+  }
+
 }

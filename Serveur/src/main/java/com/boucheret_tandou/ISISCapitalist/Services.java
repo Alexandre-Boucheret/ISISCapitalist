@@ -161,7 +161,7 @@ public class Services {
 
         angelupgrade.setUnlocked(true);
         double solde = world.getActiveangels() - angelupgrade.getSeuil();
-        world.setMoney(solde);
+        world.setActiveangels(solde);
 
         applyUpgrade(world, newangelupgrade);
         saveWorldToXml(username, world); 
@@ -173,7 +173,7 @@ public class Services {
         World world = getWorld(username);
         World newWorld = readWorldFromXml(null);
 
-        int angesSupplementaires = (int)(150 * Math.sqrt(world.getScore()/Math.pow(15, 10)) - world.getTotalangels()); 
+        int angesSupplementaires = (int)(150 * Math.sqrt(world.getScore()/Math.pow(10, 15)) - world.getTotalangels()); 
 
         newWorld.setScore(world.getScore());
         newWorld.setActiveangels(world.getActiveangels() + angesSupplementaires);

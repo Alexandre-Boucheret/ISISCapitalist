@@ -22,6 +22,9 @@ export class AppComponent {
   showUnlocks: boolean = false;
   showUpgrades: boolean = false;
   badgeUpgrades: number = 0;
+  showInvestors: boolean = false;
+  claimableInvestors: number;
+  showAngelsUpgrades: boolean = false;
 
   @ViewChildren(ProductComponent) productsComponent: QueryList<ProductComponent>;
 
@@ -37,6 +40,7 @@ export class AppComponent {
       this.world = world; 
       this.calcBadgeManager();
       this.calcBadgeUpgrade();
+      this.calcInvestors();
     }); 
   }
 
@@ -49,12 +53,14 @@ export class AppComponent {
     this.world.money += product.revenu * product.quantite;
     this.calcBadgeManager();
     this.calcBadgeUpgrade();
+    this.calcInvestors();
   }
 
   onBuyDone(cout: number){
     this.world.money -= cout;
     this.calcBadgeManager();
     this.calcBadgeUpgrade();
+    this.calcInvestors();
   }
 
   onQtmultiClick(){
@@ -94,12 +100,41 @@ export class AppComponent {
     }
   }
 
+  buyInvestors(){
+    if(this.claimableInvestors > 0){
+      this.service.deleteWorld();
+      this.service.getWorld().then( world => { 
+        this.world = world; 
+        this.calcBadgeManager();
+        this.calcBadgeUpgrade();
+        this.calcInvestors();
+      });
+    }
+  }
+
+  buyAngelUpgrade(upgrade : Pallier){
+    if(upgrade.seuil <= this.world.activeangels){
+      this.service.putAngelUpgrade(upgrade);
+      this.world.activeangels -= upgrade.seuil;
+      if(upgrade.idcible == 0){
+        this.productsComponent.first.calcUpgrade(upgrade);
+      }else{
+        this.productsComponent.find(c => c.product.id == upgrade.idcible).calcUpgrade(upgrade);
+      }
+      upgrade.unlocked = true;
+    }
+  }
+
   calcBadgeManager(): void{
     this.badgeManagers = this.world.managers.pallier.filter(p => p.seuil <= this.world.money && p.unlocked == false).length;
   }
 
   calcBadgeUpgrade(): void{
     this.badgeUpgrades = this.world.upgrades.pallier.filter(p => p.seuil <= this.world.money && p.unlocked == false).length;
+  }  
+  
+  calcInvestors(): void{
+    this.claimableInvestors = Math.floor(150 * Math.sqrt(this.world.score/Math.pow(10,15))) - this.world.totalangels;
   }
 
   popMessage(message : string) : void {
