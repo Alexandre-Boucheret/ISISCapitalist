@@ -1,139 +1,168 @@
+<!--En tête-->
 <div class="header">
-  <img src="{{server}}icones/{{world.logo}}" />
-  <span id="worldname"> {{world.name}} </span>
-  <span [innerHTML]="world.money | bigvalue"> </span>
-  <button mat-button [innerHTML]="qtmulti" (click)="onQtmultiClick()"></button>
-  <input type="text" [(ngModel)]="username" (change)="onUsernameChanged()" />
+  <img id="image" src="{{server}}icones/{{world.logo}}" />
+  <div class="tableauworld">
+    <div>
+      <span id="worldname"> Welcome {{world.name}} world</span>
+    </div>
+    <div>
+      <input id="joueur" type="text" [(ngModel)]="username" (change)="onUsernameChanged()" name="joueur" />
+    </div>
+  </div>
+  <span id="argent" [innerHTML]="world.money | bigvalue"></span>
+  <button class="grosBouton" mat-button [innerHTML]="qtmulti" (click)="onQtmultiClick()"></button>
 </div>
+
+<div class="globalProduct">
 <mat-sidenav-container>
   <mat-sidenav mode="side" opened>
-    <button mat-raised-button color="primary" [matBadge]="badgeManagers" [matBadgeHidden]="badgeManagers==0"
-      (click)="showManagers = !showManagers">Managers</button>
-    <button mat-raised-button color="primary" (click)="showUnlocks = !showUnlocks">Unlocks</button>
-    <button mat-raised-button color="primary" [matBadge]="badgeUpgrades" [matBadgeHidden]="badgeUpgrades==0"
-      (click)="showUpgrades = !showUpgrades">Upgrades</button>
-    <button mat-raised-button color="primary" (click)="showInvestors = !showInvestors">Investors</button>
-    <button mat-raised-button color="primary" (click)="showAngelsUpgrades = !showAngelsUpgrades">Angel Upgrades</button>
+    <div class="globalBouton">
+      <button mat-raised-button class="optionBouton" color="primary" [matBadge]="badgeManagers"
+        [matBadgeHidden]="badgeManagers==0" (click)="showManagers = !showManagers">Managers</button>
+      <button mat-raised-button class="optionBouton" color="primary"
+        (click)="showUnlocks = !showUnlocks">Unlocks</button>
+      <button mat-raised-button class="optionBouton" color="primary" [matBadge]="badgeUpgrades" [matBadgeHidden]="badgeUpgrades==0"
+        (click)="showUpgrades = !showUpgrades">Upgrades</button>
+      <button mat-raised-button class="optionBouton" color="primary"
+        (click)="showInvestors = !showInvestors">Investors</button>
+      <button mat-raised-button class="optionBouton" color="primary"
+        (click)="showAngelsUpgrades = !showAngelsUpgrades">Angel Upgrades</button>
+    </div>
   </mat-sidenav>
-  <mat-sidenav-content class="main">
+  <mat-sidenav-content class="mainProduct">
     <div class="product" *ngFor="let product of world.products.product">
       <app-product [prod]="product" [monde]="this.world" [qtmulti]="this.qtmulti" [money]="world.money"
         (notifyProduction)="onProductionDone($event)" (notifyBuy)="onBuyDone($event)"></app-product>
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
+</div>
 
-<div *ngIf="showManagers" class="modal">
-  <div>
-    <h1 class="title">Managers make you feel better !</h1>
+<div class="global">
+  <div *ngIf="showManagers" class="modal">
+    <div class=bandeau>
+      <h1 class="title">Managers make you feel better !</h1>
+      <button class="closebutton" mat-raisedbutton color="primary" (click)="showManagers = !showManagers">Close</button>
+    </div>
+    <div class="tableau">
+      <div *ngFor="let manager of world.managers.pallier" class="tableau">
+        <div *ngIf="!manager.unlocked" class="managerslayout">
+          <div>
+            <div class="logo"><img class="taille" src="{{server}}icones/{{manager.logo}}" /> </div>
+          </div>
+          <div>
+            <div class="managername"> {{ manager.name}} </div>
+            <div class="managercible"> {{ world.products.product[manager.idcible-1].name }} </div>
+            <div class="managercost"> {{ manager.seuil}} </div>
+          </div>
+          <div>
+            <button mat-button class="hirebutton" (click)="hireManager(manager)"
+              [ngClass]="{'selectable' : (world.money >= manager.seuil)}">Hire !</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-  <div>
-    <div *ngFor="let manager of world.managers.pallier">
-      <div *ngIf="!manager.unlocked" class="managerslayout">
+</div>
+
+
+<div class="global">
+  <div *ngIf="showUnlocks" class="modal">
+    <div class=bandeau>
+      <h1 class="title">Unlocks make you feel better !</h1>
+      <button class="closebutton" mat-raisedbutton color="primary" (click)="showUnlocks = !showUnlocks">Close</button>
+    </div>
+    <div class="tableau">
+      <div *ngFor="let product of world.products.product" class="tableau">
+        <div *ngFor="let unlock of product.palliers.pallier">
+          <div *ngIf="!unlock.unlocked" class="managerslayout">
+            <div>
+              <div class="logo"><img class="round" src="{{server}}icones/{{unlock.logo}}" /> </div>
+            </div>
+            <div>
+              <div> {{ unlock.name}} </div>
+              <div> {{ unlock.typeratio }} </div>
+              <div> {{ unlock.seuil}} </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="global">
+  <div *ngIf="showUpgrades" class="modal">
+    <div class=bandeau>
+      <h1 class="title">Upgrades make you feel better !</h1>
+      <button class="closebutton" mat-raisedbutton color="primary" (click)="showUpgrades = !showUpgrades">Close</button>
+    </div>
+    <div class="tableau">
+    <div *ngFor="let upgrade of world.upgrades.pallier" class="placeBillet">
+      <div *ngIf="!upgrade.unlocked">
         <div>
-          <div class="logo"><img class="round" src="{{server}}icones/{{manager.logo}}" /> </div>
+          <div class="logo"><img class="taille" src="{{server}}icones/{{upgrade.logo}}" /> </div>
         </div>
         <div>
-          <div class="managername"> {{ manager.name}} </div>
-          <div class="managercible"> {{ world.products.product[manager.idcible-1].name }} </div>
-          <div class="managercost"> {{ manager.seuil}} </div>
+          <div> {{ upgrade.name}} </div>
+          <div> {{ upgrade.ratio}} </div>
+          <div> {{ upgrade.typeratio}} </div>
+          <div> {{ upgrade.seuil}} </div>
         </div>
         <div>
-          <button mat-button class="hirebutton" (click)="hireManager(manager)"
-            [ngClass]="{'selectable' : (world.money >= manager.seuil)}">Hire !
+          <button mat-button class="hirebutton" (click)="buyUpgrade(upgrade)"
+            [ngClass]="{'selectable' : (world.money >= upgrade.seuil)}">Buy !
           </button>
         </div>
       </div>
     </div>
-    <button class="closebutton" mat-raisedbutton color="primary" (click)="showManagers = !showManagers">Close</button>
+  </div>
   </div>
 </div>
 
-<div *ngIf="showUnlocks" class="modal">
-  <div>
-    <h1 class="title">Unlocks make you feel better !</h1>
-  </div>
-  <div *ngFor="let product of world.products.product">
-    <div *ngFor="let unlock of product.palliers.pallier">
-      <div *ngIf="!unlock.unlocked">
-        <div>
-          <div class="logo"><img class="round" src="{{server}}icones/{{unlock.logo}}" /> </div>
-        </div>
-        <div>
-          <div> {{ unlock.name}} </div>
-          <div> {{ unlock.typeratio }} </div>
-          <div> {{ unlock.seuil}} </div>
-        </div>
-      </div>
+<div class="global">
+  <div *ngIf="showInvestors" class="modal">
+    <div class=bandeau>
+      <h1 class="title">Investors</h1>
+      <button class="closebutton" mat-raisedbutton color="primary" (click)="showInvestors = !showInvestors">Close</button>
     </div>
-  </div>
-  <button class="closebutton" mat-raisedbutton color="primary" (click)="showUnlocks = !showUnlocks">Close</button>
-</div>
-
-<div *ngIf="showUpgrades" class="modal">
-  <div>
-    <h1 class="title">Upgrades make you feel better !</h1>
-  </div>
-  <div *ngFor="let upgrade of world.upgrades.pallier">
-    <div *ngIf="!upgrade.unlocked">
-      <div>
-        <div class="logo"><img class="round" src="{{server}}icones/{{upgrade.logo}}" /> </div>
+    <div class="tableau">
+      <div class="placeBillet">
+        <div>{{world.activeangels}} investisseurs possédés</div>
+        <div>{{world.angelbonus}}%</div>
       </div>
       <div>
-        <div> {{ upgrade.name}} </div>
-        <div> {{ upgrade.ratio}} </div>
-        <div> {{ upgrade.typeratio}} </div>
-        <div> {{ upgrade.seuil}} </div>
-      </div>
-      <div>
-        <button mat-button class="hirebutton" (click)="buyUpgrade(upgrade)"
-          [ngClass]="{'selectable' : (world.money >= upgrade.seuil)}">Buy !
+        <button class="closebutton" style="padding: 8px;" mat-raisedbutton color="primary" (click)="buyInvestors()">
+          <div>{{claimableInvestors}} disponible(s)</div>
         </button>
       </div>
     </div>
   </div>
-  <button class="closebutton" mat-raisedbutton color="primary" (click)="showUpgrades = !showUpgrades">Close</button>
 </div>
 
-<div *ngIf="showInvestors" class="modal">
-  <div>
-    <h1 class="title">Investors</h1>
-  </div>
-  <div>
-    <div>
-      <div>{{world.activeangels}} investisseurs possédés</div>
-      <div>{{world.angelbonus}}%</div>
+<div class="global">
+  <div *ngIf="showAngelsUpgrades" class="modal">
+    <div class="bandeau">
+      <h1 class="title">Angels Upgrades make you feel better !</h1>
+      <button class="closebutton" mat-raisedbutton color="primary" (click)="showAngelsUpgrades = !showAngelsUpgrades">Close</button>
     </div>
-    <div>
-      <button class="investorsbutton" mat-raisedbutton color="primary" (click)="buyInvestors()">
-        <div>{{claimableInvestors}} disponible(s)</div>
-      </button>
-    </div>
-  </div>
-  <button class="closebutton" mat-raisedbutton color="primary" (click)="showInvestors = !showInvestors">Close</button>
-</div>
-
-<div *ngIf="showAngelsUpgrades" class="modal">
-  <div>
-    <h1 class="title">Angels Upgrades make you feel better !</h1>
-  </div>
-  <div *ngFor="let angelUpgrade of world.angelupgrades.pallier">
-    <div *ngIf="!angelUpgrade.unlocked">
-      <div>
-        <div class="logo"><img class="round" src="{{server}}icones/{{angelUpgrade.logo}}" /> </div>
-      </div>
-      <div>
-        <div> {{ angelUpgrade.name}} </div>
-        <div> {{ angelUpgrade.typeratio }} </div>
-        <div> {{ angelUpgrade.seuil}} </div>
-      </div>
-      <div>
-        <button mat-button class="hirebutton" (click)="buyAngelUpgrade(angelUpgrade)"
-          [ngClass]="{'selectable' : (world.money >= angelUpgrade.seuil)}">Buy !
-        </button>
+    <div class="tableau">
+    <div *ngFor="let angelUpgrade of world.angelupgrades.pallier" class="tableau" >
+      <div *ngIf="!angelUpgrade.unlocked" class="managerslayout">
+        <div>
+          <div class="logo"><img class="taille" src="{{server}}icones/{{angelUpgrade.logo}}" /> </div>
+        </div>
+        <div>
+          <div> {{ angelUpgrade.name}} </div>
+          <div> {{ angelUpgrade.typeratio }} </div>
+          <div> {{ angelUpgrade.seuil}} </div>
+        </div>
+        <div>
+          <button mat-button class="hirebutton" (click)="buyAngelUpgrade(angelUpgrade)"
+            [ngClass]="{'selectable' : (world.money >= angelUpgrade.seuil)}">Buy !
+          </button>
+        </div>
       </div>
     </div>
   </div>
-  <button class="closebutton" mat-raisedbutton color="primary"
-    (click)="showAngelsUpgrades = !showAngelsUpgrades">Close</button>
+  </div>
 </div>

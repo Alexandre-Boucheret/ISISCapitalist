@@ -1,10 +1,15 @@
-
-<img src="{{server}}icones/{{product.logo}}" (click)="launchProduction()"/>
-<span>{{product.quantite}}</span>
-<mat-progress-bar [(ngModel)]="progressbar" class="progressbar" [value]="progressbarvalue"></mat-progress-bar>
-<!-- TODO afficher le cout -->
-<button mat-button (click)="onBuy()" [disabled]="canBuy() === false">
-    <div>Acheter</div>
-    <div>{{_qtmulti}}</div>
-    <div>{{calcMaxCanBuy()}}</div>
-</button>
+<div class="tableauProduct">
+    <div>
+        <img src="{{server}}icones/{{product.logo}}" (click)="launchProduction()"/>
+        <span> Quantity of product : {{product.quantite}}</span>
+    </div>
+    <div>
+    <!-- TODO afficher le cout -->
+    <button id="boutonProduct" mat-button (click)="onBuy()" [disabled]="canBuy() === false">
+        <div>Buy !</div>
+        <div>{{_qtmulti}}</div>
+        <div>{{calcMaxCanBuy()}}</div>
+    </button>
+    <mat-progress-bar [(ngModel)]="progressbar" class="progressbar" [value]="progressbarvalue"></mat-progress-bar>
+</div>
+</div>

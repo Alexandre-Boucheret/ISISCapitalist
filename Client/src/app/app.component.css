@@ -1,22 +1,68 @@
 .header { 
     display: grid; 
-    grid-template-columns: 25% 25% 30% 20%; 
+    grid-template-columns: 30% 20% 20% 30%; 
+    font-family:arial;
+    font-size:25px;
+    margin-bottom: 20px;
+    background-color: rgb(137, 192, 132);
 } 
+
+#image{
+    width: 150px;
+    height: 150px;
+    /*margin-left: auto;
+    margin-right: auto;*/
+    /*display: block;*/
+    /*border-radius:20em;*/
+    /*margin-bottom: 20px;*/
+}
+
+.tableauworld{
+    display: grid; 
+    grid-template-rows: 50% 50%;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+#joueur{
+    height:20px;
+    width:100px;
+}
+
+#worldname{
+    margin-top: auto;
+    margin-bottom: auto;
+}
 
 .main { 
     display: grid; 
     grid-template-columns: 50% 50%; 
 } 
 
-.product { 
+/*.mainProduct { 
     display: grid; 
-    grid-template-columns: 1fr 1fr; 
+    grid-template-columns: 50% 50%; 
+} */ /*Mettre les produits en deux colonnes*/
+
+.product { 
+    margin-top: 10px;
+    margin-left: 20px;
+    /*display: grid; 
+    /*grid-template-columns: 1fr 1fr; /*Mettre en colonne les produits*/
 }
 
 .round { 
+    /*width: 100px;
+    height: 100px; */
+    border-radius: 10% ;
+    margin : 10px;
+}
+
+.taille{
     width: 100px;
-    height: 100px; 
-    border-radius: 50% 
+    height: 100px;
+    border-radius: 10% ;
+    margin : 10px;
 }
 
 .lesdeux { 
@@ -29,13 +75,160 @@
 }
 
 .modal {
-    position: fixed;
-    z-index: 2;
-    width: 80%;
-    height: 800px;
+    /*position: fixed;*/
+    /*z-index: 2;/*mettre au premier plan*/
+    /*width: 60%;*/
+    height: auto;
     overflow: auto;
     background-color: white;
     border: solid;
+    border-width: 1px;
     top: 10%;
-    left: 10%;
+    left: 20%;
+}
+
+.grosBouton{
+    background: rgb(76, 105, 73);
+    border: 2px solid transparent;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-size: 20px;
+    /*font-weight: 500;*/
+    margin: 10px;
+    padding: 10px 10px;
+    text-align: center;
+    display:inline-block;
+    outline:none;
+    position:relative;
+    /*background:#000000;*/
+	color:#fff;
+    border-radius:20%;
+    border-color: black;
+    border-width: 2px;
+    width: 20%;
+    height: 30%;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.hirebutton{
+    background:transparent;
+    border: 2px solid transparent;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 500;
+    text-align: center;
+    background-color:rgb(76, 105, 73);;
+	color:rgb(255, 255, 255);
+    border-radius:20em;
+    border-color: black;
+    border-width: 1px;
+}
+
+.hirebutton:disabled{
+    background-color:transparent;
+	color:#000;
+}
+
+.optionBouton{
+    background:transparent;
+    border: 2px solid transparent;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-size: 15px;
+    padding:10px 10px;
+    text-align: center;
+    text-decoration: none;
+    display:inline-block;
+    outline:none;
+    position:relative;
+    background:rgb(137, 192, 132);
+    color:black;
+    border-width: 2px;
+    border-color: black;
+    border-radius:20em;
+    margin-top: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+
+
+.title{
+    text-align: center;
+    font-size: 20px;
+}
+
+.logo{
+    float: left;
+}
+
+.managerslayout{
+    text-align: center;
+}
+
+.bandeau{
+    display: grid; 
+    grid-template-columns: 90% 10%;  
+    margin:10px;
+}
+
+.closebutton{
+    background:transparent;
+    border: 2px solid transparent;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 500;
+    text-align: center;
+    background:rgb(137, 192, 132);
+    border-color: black;
+    border-width: 1px;
+	color : black;
+    border-radius:20em;
+}
+
+.globalProduct{
+  float: left;
+  width: 50%;
+}
+
+ .global{
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+ }
+
+#argent{
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.tableauManager{
+    /*display: grid; 
+    grid-template-columns: 33% 33% 33%; /*Mettre en colonne les produits*/
+    display: flex; 
+    flex-wrap: wrap;
+}
+
+
+.tableau{
+    display: flex; 
+    flex-wrap: wrap;
+    margin-left: 8px;
+    margin-right: 8px;
+}
+
+.placeBillet{
+    padding-left: 8px;
+    padding-right: 8px;
+    margin-left: 3px;
+    margin-right: 3px;
+}
+
+.globalBouton{
+    display: grid; 
+    grid-template-rows: 50% 50%;
+
 }

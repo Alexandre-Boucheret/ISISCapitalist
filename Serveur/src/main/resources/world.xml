@@ -107,7 +107,7 @@
     </product>
     <product>
       <id>4</id>
-      <name>Faubourg Saint-Honoré</name>
+      <name>Faubourg St-Honoré</name>
       <logo>FaubourgSaint-Honore.png</logo>
       <cout>8640</cout>
       <croissance>1.13</croissance>
@@ -251,7 +251,7 @@
       <unlocked>false</unlocked>
     </pallier>
     <pallier>
-      <name>Boost Faubourg Saint-Honoré</name>
+      <name>Boost Faubourg St-Honoré</name>
       <logo>argents.jpg</logo>
       <seuil>400000</seuil>
       <idcible>4</idcible>
